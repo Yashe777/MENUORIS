@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bella Vista - Digital Menu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#ff6633',
+                        'primary-dark': '#e55a2b',
+                        secondary: '#2d5016',
+                        'secondary-light': '#4ade80'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .slide-in { animation: slideInFromTop 0.3s ease-out; }
+        @keyframes slideInFromTop {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <h1 class="text-2xl font-bold text-primary">Bella Vista</h1>
+                        <p class="text-xs text-gray-500">Authentic Italian Cuisine</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <button id="cart-btn" class="bg-primary hover:bg-primary-dark text-white p-2 rounded-full relative">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path>
+                            </svg>
+                            <span id="cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-6 w-6 flex items-center justify-center hidden">0</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative h-64 sm:h-80 lg:h-96 overflow-hidden">
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080')"></div>
+        <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center">
+            <div class="text-white">
+                <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4">Delicious Food,<br />Delivered Fresh</h2>
+                <p class="text-xl mb-6 max-w-2xl">Experience authentic Italian flavors from the comfort of your home. Order now for quick delivery!</p>
+                <button onclick="document.getElementById('menu').scrollIntoView({ behavior: 'smooth' })" class="bg-primary hover:bg-primary-dark text-white px-8 py-3 text-lg rounded-md">
+                    View Menu ↓
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">Our Menu</h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">Discover our carefully crafted dishes made with the finest ingredients and traditional recipes passed down through generations.</p>
+        </div>
+
+        <!-- Category Navigation -->
+        <div class="flex flex-wrap justify-center gap-4 mb-12" id="category-nav">
+            <button onclick="filterCategory('all')" class="category-btn active px-6 py-3 rounded-full font-medium transition-all duration-200">All Items</button>
+            <button onclick="filterCategory('appetizers')" class="category-btn px-6 py-3 rounded-full font-medium transition-all duration-200">Appetizers</button>
+            <button onclick="filterCategory('pasta')" class="category-btn px-6 py-3 rounded-full font-medium transition-all duration-200">Pasta</button>
+            <button onclick="filterCategory('pizza')" class="category-btn px-6 py-3 rounded-full font-medium transition-all duration-200">Pizza</button>
+            <button onclick="filterCategory('desserts')" class="category-btn px-6 py-3 rounded-full font-medium transition-all duration-200">Desserts</button>
+        </div>
+
+        <!-- Menu Items Grid -->
+        <div id="menu-items" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Menu items will be loaded here -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Bella Vista</h3>
+                    <p class="text-gray-400">Authentic Italian cuisine delivered to your doorstep with love and tradition.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Contact Info</h4>
+                    <p class="text-gray-400 mb-2">📞 (555) 123-4567</p>
+                    <p class="text-gray-400 mb-2">✉️ orders@bellavista.com</p>
+                    <p class="text-gray-400">📍 123 Italian Street, Food City</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Hours</h4>
+                    <p class="text-gray-400 mb-2">Mon-Thu: 11am - 10pm</p>
+                    <p class="text-gray-400 mb-2">Fri-Sat: 11am - 11pm</p>
+                    <p class="text-gray-400">Sun: 12pm - 9pm</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div id="cart-sidebar" class="fixed inset-y-0 right-0 w-96 bg-white shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out z-50">
+        <div class="flex flex-col h-full">
+            <div class="flex items-center justify-between p-6 border-b">
+                <h2 class="text-xl font-semibold text-gray-900 flex items-center">
+                    <svg class="w-5 h-5 text-primary mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path>
+                    </svg>
+                    Your Order
+                </h2>
+                <button id="close-cart" class="text-gray-400 hover:text-gray-600">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <div id="cart-items" class="flex-1 overflow-y-auto p-6">
+                <div class="text-center text-gray-500 py-8">
+                    <svg class="w-16 h-16 mx-auto mb-4 opacity-50" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path>
+                    </svg>
+                    <p>Your cart is empty</p>
+                    <p class="text-sm">Add some delicious items to get started!</p>
+                </div>
+            </div>
+            
+            <div class="border-t p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-lg font-semibold">Total:</span>
+                    <span id="cart-total" class="text-2xl font-bold text-primary">$0.00</span>
+                </div>
+                <button id="checkout-btn" class="w-full bg-primary hover:bg-primary-dark text-white py-3 font-semibold transition-colors duration-200 disabled:bg-gray-300 disabled:cursor-not-allowed rounded-md" disabled>
+                    Place Order
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Backdrop -->
+    <div id="cart-backdrop" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden"></div>
+
+    <!-- Order Modal -->
+    <div id="order-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 hidden">
+        <div class="bg-white rounded-xl max-w-md w-full p-6">
+            <div id="order-form">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-xl font-semibold text-gray-900">Complete Your Order</h3>
+                    <button id="close-modal" class="text-gray-400 hover:text-gray-600">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="space-y-4 mb-6">
+                    <div>
+                        <label for="customerName" class="block text-sm font-medium text-gray-700">Your Name</label>
+                        <input id="customerName" type="text" placeholder="Enter your name" class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required>
+                    </div>
+
+                    <div class="bg-gray-50 rounded-lg p-4">
+                        <h4 class="font-medium text-gray-900 mb-2">Order Summary</h4>
+                        <div id="order-summary" class="space-y-2 text-sm"></div>
+                        <div class="border-t mt-2 pt-2 flex justify-between font-semibold">
+                            <span>Total:</span>
+                            <span id="order-total" class="text-primary">$0.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex space-x-3">
+                    <button id="cancel-order" class="flex-1 border border-gray-300 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-50">Cancel</button>
+                    <button id="submit-order" class="flex-1 bg-primary hover:bg-primary-dark text-white py-2 px-4 rounded-md">Place Order</button>
+                </div>
+            </div>
+
+            <div id="order-success" class="text-center hidden">
+                <div class="mb-4">
+                    <div class="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
+                        <svg class="w-8 h-8 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">Order Placed Successfully!</h3>
+                <p class="text-gray-600 mb-6">Your order has been sent to the restaurant. You'll receive updates on the preparation status.</p>
+                <button id="continue-shopping" class="w-full bg-primary hover:bg-primary-dark text-white py-2 px-4 rounded-md">Continue Shopping</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
